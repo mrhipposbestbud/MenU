@@ -32,8 +32,9 @@ padding: 25px;
 
 
 body{
-background-image: url('back.png')
-background-repeat:repeat-x;
+background-color: transparent;
+background-image: url('back.png');
+background-repeat: repeat-x;
 padding-top: 80px;
 }
 

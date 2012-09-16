@@ -8,6 +8,9 @@ src: url('../designer_shit/fonts/Walkway SemiBold.ttf');
 
 #herp {
 background-color:#91dace;
+padding:5px;
+height:100px;
+padding-left:20px;
 }
 
 .hero-unit{
@@ -15,18 +18,24 @@ padding:5px;
 height:100px;
 padding-left:20px;
 }
+
 .hero-unit h1 {
 	font-family: 'Pacifico','Walkway SemiBold';
-	font-size: 60px;
-	color:#ffffff;
+	font-size: 190px;
+	color:#000000;
 	
 	
 }
 
 .hero-unit p{
 	font-size: 20px;
-	color: #333333;
+	color: #fff000;
 	font-family:'Walkway SemiBold','Pacifico';
 	
 	
+}
+
+#omg
+{
+color:#ffffff;
 }
