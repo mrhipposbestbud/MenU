@@ -1,0 +1,64 @@
+h1 {
+	font-family: 'Pacifico';
+	font-size: 60px;
+	
+	
+}
+
+h2 {
+	font-family: 'Pacifico';
+	font-size: 30px;
+	padding: 25px;
+	
+	
+}
+
+p{
+	font-size: 20px;
+	color: #333333;
+	
+}
+
+#info{
+margin:0 auto;
+float:center;
+text-align:center;
+}
+
+#boxes{
+padding: 25px;
+}
+
+
+
+body{
+background-image: url('back.png')
+background-repeat:repeat-x;
+padding-top: 80px;
+}
+
+
+
+#search {
+background-color:#efefef;
+padding: 25px;
+
+}
+
+#filter {
+background-color:#efefef;
+padding: 25px;
+
+}
+
+.one, .two, .three {
+	display: none;
+}
+
+.pick {
+	display: inline !important;
+}
+
+ul li {
+	list-style: none;
+}

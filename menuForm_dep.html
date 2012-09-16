@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+	
+		<meta charset="UTF-8" />
+		
+		<title>Create your Menu</title>
+		
+		<!-- Bootstrap CSS Files -->
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.css" />
+		
+		<!-- Personal CSS Files -->
+		<link rel="stylesheet" type="text/css" href="css/restaurant_menu_form.css" />
+	
+		<!--jQuery File-->
+		<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+		
+		<!-- Bootstrap JS Files -->
+		<script language="javascript" type="text/javascript" src="bootstrap/js/bootstrap.js" ></script>
+        
+		<script type="text/javascript">
+            $(document).ready(function(){
+				stepify(1);
+            });
+			
+			function stepify(i){
+				if(i == 1){
+					$('#step1').show();
+					$('#step2').hide();
+					$('#SaveMenu').hide();
+					$('#next').show();
+					$('#pre').hide();
+				}
+				if(i == 2){
+					$('#step1').hide();
+					$('#step2').show();
+					$('#SaveMenu').show();
+					$('#next').hide();
+					$('#pre').show();
+				}
+			}
+			
+			var cats = 1;
+			
+			function addCats(){
+				cats++;
+				$('#cats').append("<input type='text' id='cat"+cats+"' name='cat"+cats+"' onKeyUp='copyCat(this);'><br>");
+				
+				var catsanditems =  "<tr><td><h3 id='cat"+cats+"print'></h3></td>";
+                    catsanditems += "<td><input type='text' name=''></td>";
+                    catsanditems += "</tr>";
+					
+				$('#btnbar').before(catsanditems);
+			}
+			
+			function copyCat(copy){
+				var id = copy.name.substr(3);
+				var bear = "#cat"+id+"print";
+				$(bear).empty().append(copy.value);
+			}
+			
+			var categors = [];
+			
+			function getCats(){
+				//Go to the pet store and buy one they are awesome!
+				categors = [];
+				alert("startingcat");
+				for(i=1;i<=cats;i++){
+					var id = 'cat'+i;
+					alert('looping');
+					alert(id);
+					alert(document.getElementsById(id).value);
+					categors.push(document.getElementsById(id).value);
+				}
+				$('#itemcat').empty();
+				for(i=1; i<=categors.length; i++){
+					j = i-1;
+					$('#itemcat').append("<option value='"+i+"'>"+categors[i]+"</option>");
+				}
+			}
+			
+		var iteminfo;
+		iteminfo = "<tr>";
+		iteminfo += "	<td></td>";
+		iteminfo += "	<td> <input class='span10' type='text' id='item-name' placeholder='Enter Item Name1...'></input> </td>";
+		iteminfo += "	<td> <input class='span10' type='text' id='id-description' placeholder='Enter Description...'></input> </td>";
+		iteminfo += "	<td id='ing'> <button class='btn btn-info' type='button' id='happy'> + Ingredients </button> </td>";
+		iteminfo += "	<td> ";
+		iteminfo += "		<table class='ing-table'>	";									
+		iteminfo += "				<tr>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'> Dairy";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'> Egg";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'> Gluten";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "				</tr>";
+		iteminfo += "				<tr>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'mbhmnbmnb> Soy";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'> Shell-Fish";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'> Fish";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "			</tr>";
+		iteminfo += "			<tr>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'> Tree Nuts";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'> Ground Nuts";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "			</tr>";
+		iteminfo += "	</table>";
+		iteminfo += "</td>";
+		iteminfo += "</tr>";
+			
+			var itemcount = [];
+			
+			function addItem(){
+				
+			}
+			
+        </script>
+
+	</head>
+	
+	<body>
+		
+		<header class="top-nav">
+			
+			<div class="navbar navbar-inverse navbar-fixed-top">
+				<div class="navbar-inner">
+					<div class="container">
+						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</a>
+						<a class="brand" href="#">Project name</a>
+						<div class="nav-collapse collapse">
+							<ul class="nav">
+								<li class="active"><a href="#">Home</a></li>
+								<li><a href="#about">About</a></li>
+								<li><a href="#contact">Contact</a></li>
+							</ul>
+							
+							<form class="navbar-search offset1">
+								<input type="text" class="search-query span4" placeholder="Search..." />
+							</form>
+							
+							
+							<ul class="nav pull-right">
+								<li class="dropdown pull-right">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+										John Doe
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<li><a href="#">My Preferences</a></li>
+										<li><a href="#">Account Settings</a></li>
+										<li><a href="#">Log Out</a></li>
+									</ul>
+								</li>
+							</ul>
+							
+						</div><!--/.nav-collapse -->
+					</div>
+				</div>
+			</div>
+		
+		</header>
+		
+		<div class="container-fluid">
+		
+			<div class="row-fluid" id="main">
+            
+            	<div class="span9 offset1">
+                	<form id='menuForm' action="submitMenu.php" method="post">
+                    <div id="step1">
+                    <table class="table table-bordered table-striped">
+                    	<tr>
+                        	<td style="background-color:#000;" colspan="2"><h2><font color="#FFFFFF">Step 1</font></h2>
+                            <div class="progress progress-striped active">
+                              <div class="bar" style="width: 50%;"></div>
+                            </div></td>
+                        </tr>
+                        <tr>
+                        	<td colspan="2"><span>Enter categories such as "Appetizers" to divide your menu into sections</span></td>
+                        </tr>
+                        <tr>
+                        	<td><h4>Categories</h4></td>
+                        	<td id="cats"><input type="text" id="cat1" name="cat1" onKeyUp="copyCat(this);"><br></td>
+                        </tr>
+                        <tr>
+                        	<td colspan="2"><div class="btn-toolbar" align="right">
+                            	<a onclick="addCats();" id="addcat" class="btn btn-primary">Add Category</a>
+                                <a onclick="stepify(2); getCats();" id="next" class="btn">Next</a>
+                    		</div></td>
+                    	</tr>
+                    </table>
+                    </div>
+                    <div id="step2" style="display:none;">
+                    <table class="table table-bordered table-striped">
+                    	<tr>
+                        	<td  style="background-color:#000;" colspan="5"><h2><font color="#FFFFFF">Step 2</font></h2>
+                            <div class="progress progress-striped active">
+                              <div class="bar" style="width: 70%;"></div>
+                            </div></td>
+                        </tr>
+                        <tr>
+                        	<td colspan="5"><span>Enter Items to fill categories.</span></td>
+                        </tr>
+                        <tr>
+                        	<td><h3 id="cat1print"></h3></td>
+<td> <input class='span10' type='text' name="item-name1" id='item-name1' placeholder='Enter Item Name...'></input> </td>
+			<td> <input class='span10' type='text' name="id-description1" id='id-description' placeholder='Enter Description...'></input> </td>
+			<td> 
+				<table class='ing-table'>										
+						<tr>
+							<td>
+								<label class='checkbox inline'>
+									<input type='checkbox' id='inlineCheckbox1' value='option1'> Dairy
+								</label>
+							</td>
+							<td>
+								<label class='checkbox inline'>
+									<input type='checkbox' id='inlineCheckbox1' value='option1'> Egg
+								</label>
+							</td>
+							<td>
+								<label class='checkbox inline'>
+									<input type='checkbox' id='inlineCheckbox1' value='option1'> Gluten
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class='checkbox inline'>
+									<input type='checkbox' id='inlineCheckbox1' value='option1'mbhmnbmnb> Soy
+								</label>
+							</td>
+							<td>
+								<label class='checkbox inline'>
+									<input type='checkbox' id='inlineCheckbox1' value='option1'> Shell-Fish
+								</label>
+							</td>
+							<td>
+								<label class='checkbox inline'>
+									<input type='checkbox' id='inlineCheckbox1' value='option1'> Fish
+								</label>
+							</td>
+					</tr>
+					<tr>
+							<td>
+								<label class='checkbox inline'>
+									<input type='checkbox' id='inlineCheckbox1' value='option1'> Tree Nuts
+								</label>
+							</td>
+							<td>
+								<label class='checkbox inline'>
+									<input type='checkbox' id='inlineCheckbox1' value='option1'> Ground Nuts
+								</label>
+							</td>
+					</tr>
+			</table>
+		</td>
+        </tr>
+                        <tr id="btnbar">
+                        	<td colspan="5"><div class="btn-toolbar" align="left">
+                            <select id="itemcat"><option id='cat1print' value="1"></option></select>
+                            <a onClick="addItem();" class="btn btn-primary">Add Item</a>
+                                <a onclick="stepify(1);" id="next" class="btn" style="float:right;">Prev</a>
+                    		</div></td>
+                    	</tr>
+                    </table>
+                    </div>
+                    <div>
+                    </div>
+              </form>
+              </div>
+                            
+            
+            <!-- Debugging results -->
+            	<div id="debug">
+                </div>
+            <!--End Debugging-->
+            
+			</div> <!-- End row2 -->
+			
+			
+		</div> <!-- End container-fluid -->
+			
+		
+		
+		</div>
+	
+	</body>
+
+				
+		<script type="text/javascript" language="javascript">
+				
+				
+			$('#happy').click(function(event){
+				 //...... logic to hide and show tab content
+				
+				//add 'active' css into clicked navigation
+				$(this).remove();
+				$('#ing').append('<input class="span10" type="text" id="id-description" placeholder="Enter Ingredient1, Ingredient2..."></input>');
+			});
+		
+		
+			
+			
+		</script>
+
+
+
+</html>

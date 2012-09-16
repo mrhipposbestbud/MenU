@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>menu&amp;me</title>
+
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    
+    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap-responsive.css" />
+   
+    <link rel="stylesheet" type="text/css" href="assets/css/map.css" />
+        
+    <!--jQuery File-->
+		<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+		
+		<!-- Bootstrap JS Files -->
+		<script language="javascript" type="text/javascript" src="../bootstrap/js/bootstrap.js" ></script>
+    
+  </head>
+
+  <body>
+
+    <header>
+			
+			<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#"><img src="../designer_shit/icon.png"></a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">John Doe <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Preferences</a></li>
+                  <li><a href="#">Account Settings</a></li>
+                  <li><a href="#">Log out</a></li>
+                </ul>
+              </li>
+            </ul>
+            
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+		</header>
+		
+    <div class="container-fluid">
+
+      <!-- Example row of columns -->
+      <div class="row-fluid">
+      
+        <div class="span6" style="height: 550px; margin-top: 5%;">
+        	<iframe src="search.html" width="100%" height="100%" frameborder="0"> </iframe>
+        </div>
+
+        <div class="span6" style="margin-top: 1%">
+        	<h2>Now get picky!:	</h2>
+
+					<form action="models/quickQuery.php">
+						<div id="filter">
+						<fieldset>
+							<div class="clearfix" id = "boxes">
+								<h3>Killer Ingredients<small>Pick your choice of poison </small></h3>
+								<div class="input">
+									<ul class="inputs-list">
+										<li>
+											<label>
+												<input type="checkbox" name="optionsCheckboxes" value="1" />
+												<span>Meat</span>
+											</label>
+										</li>
+										<li>
+											<label>
+												<input type="checkbox" name="optionsCheckboxes" value="1 " />
+												<span>Nut</span>
+											</label>
+										</li>
+									 <li>
+											<label>
+												<input type="checkbox" name="optionsCheckboxes" value="option2" />
+												<span>Wheat</span>
+											</label>
+										</li>
+										 <li>
+											<label>
+												<input type="checkbox" name="optionsCheckboxes" value="option2" />
+												<span>something else</span>
+											</label>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="clearfix" id = "boxes">
+								<h3 class="one">Pick a nation, any nation</h3>
+								<h3 class="two">How you feeling today?</h3>
+								<h3 class="three">Pick a color</h3>
+								<div class="input">
+									<ul class="inputs-list">
+										<li>
+											<label>
+												<input type="checkbox" name="optionsCheckboxes" value="1" />
+												<span class="one">Americuh</span>
+												<span class="two">Fishy</span>
+												<span class="three">Green</span>
+											</label>
+										</li>
+										<li>
+											<label>
+												<input type="checkbox" name="optionsCheckboxes" value="1" />
+												<span class="one">Ching Chong</span>
+												<span class="two">Meaty</span>
+												<span class="three">Red</span>
+											</label>
+										</li>
+									 <li>
+											<label>
+												<input type="checkbox" name="optionsCheckboxes" value="1" />
+												<span class="one">Fishy</span>
+												<span class="two">leafy</span>
+												<span class="three">Rainbow</span>
+											</label>
+										</li>
+										 <li>
+											<label>
+												<input type="checkbox" name="optionsCheckboxes" value="1" />
+												<span class="one">Mario's Hometown</span>
+												<span class="two">Mushy</span>
+												<span class="three">Brown</span>
+											</label>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="actions">
+								<input type="submit" class="btn primary" value="Save preferences">&nbsp;<button type="reset" class="btn">Cancel</button>
+							</div>
+						</div>
+						</fieldset>
+				
+					</form>
+        
+        </div>
+        
+      </div> <!-- End row-fluid -->
+
+    </div> <!-- /container -->
+
+  </body>
+  
+  <script>
+  	$(document).ready(function(){
+  	var num = Math.floor( (Math.random()*3) + 1);
+  
+  	if(num === 1) {
+  		$('.one ').addClass("pick");
+  	}
+  	else if(num === 2) {
+  		$('.two').addClass("pick");
+  	}
+  	else {
+  		$('.three').addClass("pick")
+  	}
+  	});
+
+	</script>
+</html>

@@ -1,0 +1,44 @@
+body {
+	background-image: url("../designer_shit/back.png");
+	background-repeat: repeat-x;
+	background-attachment:fixed;
+	background-position: center;
+}
+
+
+#btn-wrapper {
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	margin-left: -10%;
+
+}
+
+#btn-wrapper button {
+	font-family: "Walkway UltraBold";
+	font-size: 3em;
+	height: 100px;
+	margin-bottom: 10%;
+	padding: 20px;
+	
+}
+
+#btn-wrapper img {
+	margin-bottom: 10%;
+	margin-top: -10%;
+
+}
+
+
+#form-wrapper-restaurant, #form-wrapper-customer {
+	display: none;
+	width:15%;
+	position: absolute;
+	top: 15%;
+	left:42%;
+
+}
+
+.activate {
+	display: block !important;
+}

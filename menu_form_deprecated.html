@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+	
+		<meta charset="UTF-8" />
+		
+		<title>Create your Menu</title>
+		
+		<!-- Bootstrap CSS Files -->
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.css" />
+		
+		<!-- Personal CSS Files -->
+		<link rel="stylesheet" type="text/css" href="css/restaurant_menu_form.css" />
+	
+		<!--jQuery File-->
+		<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+		
+		<!-- Bootstrap JS Files -->
+		<script language="javascript" type="text/javascript" src="bootstrap/js/bootstrap.js" ></script>
+        
+        <!-- Form Manipulation --> 
+        <script>
+		
+		var cats = 0;
+		var items = 0;
+		
+		var opener;
+		opener = "<div>";
+		opener += "<table class='table table-bordered' id='cattable'>";
+        opener += "       	<tr>";
+        opener += "            	<td colspan='5'>";
+        opener += "               <label>Category Name <font color='red' id='catalert' style='display:none;'>You must create a category</font></label>";
+        opener += "             <input type='text' id='catname' name='catname'>";
+        opener += "             </td>";
+        opener += "         </tr>";
+		opener += "			<tr>";
+		opener += "				<th>#</th>";
+		opener += "				<th>Item Name</th>";
+		opener += "				<th>Description</th>";
+		opener += "				<th>Ingredients</th>";
+		opener += "				<th>Allergens</th>";
+		opener += "			</tr>";
+		opener += "	</table>";
+		opener += "		<div class='row-fluid'>";
+		opener += "			<button class='btn btn-primary pull-right' onclick='addItem();' type='button'>Add Item</button>";
+		opener += "		</div>";
+		opener += "</div>";
+		
+		var iteminfo;
+		iteminfo = "<tr>";
+		iteminfo += "	<td></td>";
+		iteminfo += "	<td> <input class='span10' type='text' id='item-name' placeholder='Enter Item Name1...'></input> </td>";
+		iteminfo += "	<td> <input class='span10' type='text' id='id-description' placeholder='Enter Description...'></input> </td>";
+		iteminfo += "	<td id='ing'> <button class='btn btn-info' type='button' id='happy'> + Ingredients </button> </td>";
+		iteminfo += "	<td> ";
+		iteminfo += "		<table class='ing-table'>	";									
+		iteminfo += "				<tr>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'> Dairy";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'> Egg";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'> Gluten";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "				</tr>";
+		iteminfo += "				<tr>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'mbhmnbmnb> Soy";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'> Shell-Fish";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'> Fish";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "			</tr>";
+		iteminfo += "			<tr>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'> Tree Nuts";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "					<td>";
+		iteminfo += "						<label class='checkbox inline'>";
+		iteminfo += "							<input type='checkbox' id='inlineCheckbox1' value='option1'> Ground Nuts";
+		iteminfo += "						</label>";
+		iteminfo += "					</td>";
+		iteminfo += "			</tr>";
+		iteminfo += "	</table>";
+		iteminfo += "</td>";
+		iteminfo += "</tr>";
+		
+		function addCategory(){
+			if(!cats){
+				$('#main').append(opener);
+				cats++;
+			}
+			else{
+				sendCurrentCat();
+				cats = 0;
+			}
+		}
+		
+		function addItem(){
+			if(checkCatSave()){
+				$('#cattable').append(iteminfo);
+			}
+			else{
+				alertCatname();
+			}
+		}
+		
+		function alertCatname(){
+			$('#catalert').show();
+		}
+		
+		function saveCat(){
+			var data = document.getElementById('catname').value;
+			$.post("models/editmenu.php", { category:data });
+			
+			//Use for Debugging
+			//$.post("models/editmenu.php", { category:data }, function(data){$('#debug').append(data);});
+		}
+		
+		function checkCatSave(){
+			var catname = document.getElementById('catname').value;
+			if(catname == "" || catname == null){
+				return false;
+			}
+			else {
+				saveCat();
+				return true;
+			}
+		}
+		
+		</script>
+
+		
+	</head>
+	
+	<body>
+		
+		<header class="top-nav">
+			
+			<div class="navbar navbar-inverse navbar-fixed-top">
+				<div class="navbar-inner">
+					<div class="container">
+						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</a>
+						<a class="brand" href="#">Project name</a>
+						<div class="nav-collapse collapse">
+							<ul class="nav">
+								<li class="active"><a href="#">Home</a></li>
+								<li><a href="#about">About</a></li>
+								<li><a href="#contact">Contact</a></li>
+							</ul>
+							
+							<form class="navbar-search offset1">
+								<input type="text" class="search-query span4" placeholder="Search..." />
+							</form>
+							
+							
+							<ul class="nav pull-right">
+								<li class="dropdown pull-right">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+										John Doe
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<li><a href="#">My Preferences</a></li>
+										<li><a href="#">Account Settings</a></li>
+										<li><a href="#">Log Out</a></li>
+									</ul>
+								</li>
+							</ul>
+							
+						</div><!--/.nav-collapse -->
+					</div>
+				</div>
+			</div>
+		
+		</header>
+		
+		<div class="container-fluid">
+		
+			<div class="row-fluid">
+				
+				<div class="form-controls">
+				
+					<button class="btn btn-success" onclick='addCategory();' type="button" > New Category </button>
+					<button class="btn btn-warning" type="button" > Warning </button>
+					<button class="btn btn-danger" type="button" /> Danger </button>
+				
+				</div>
+			
+			</div> <!-- end row1 -->
+		
+			<div class="row-fluid" id="main">
+            
+            <!-- Debugging results -->
+            	<div id="debug">
+                </div>
+            <!--End Debugging-->
+            
+			</div> <!-- End row2 -->
+			
+			
+		</div> <!-- End container-fluid -->
+			
+		
+		
+		</div>
+	
+	</body>
+
+				
+		<script type="text/javascript" language="javascript">
+				
+				
+			$('#happy').click(function(event){
+				 //...... logic to hide and show tab content
+				
+				//add 'active' css into clicked navigation
+				$(this).remove();
+				$('#ing').append('<input class="span10" type="text" id="id-description" placeholder="Enter Ingredient1, Ingredient2..."></input>');
+			});
+		
+		
+			
+			
+		</script>
+
+
+
+</html>

@@ -1,0 +1,20 @@
+h1 {
+	font-family: 'Pacifico';
+	font-size: 50px;
+	
+	
+}
+
+p{
+	font-size: 20px;
+	color: #333333;
+	
+}
+
+#info{
+margin:0 auto;
+float:center;
+text-align:center;
+}
+
+

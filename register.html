@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+	
+		<meta charset="utf-8" />
+		
+		<title>Create your Menu</title>
+		
+		<!-- Bootstrap CSS Files -->
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.css" />
+		
+		<!-- Personal CSS Files -->
+		<link rel="stylesheet" type="text/css" href="css/register.css" />
+	
+		<!--jQuery File-->
+		<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+		
+		<!-- Bootstrap JS Files -->
+		<script language="javascript" type="text/javascript" src="bootstrap/js/bootstrap.js" ></script>
+		
+	</head>
+	
+	<body>
+	
+		<div id="btn-wrapper">
+			<img src="designer_shit/home_title.png" />
+			<button class="btn btn-warning btn-block" id="rest"> Restaurants </button>
+			<button class="btn btn-primary btn-block" id="cust"> Customers </button>
+		</div>
+	
+		<div id="form-wrapper-restaurant" class="well">
+			<form action="models/ownerreg.php" method="post">
+				<div class="control-group">
+					<label class="control-label" for="ownerName">John Doe</label>
+					<div class="controls">
+						<input type="text" name="ownerName" placeholder="First Last...">
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="ownerNumber">Phone Number</label>
+					<div class="controls">
+						<input type="text" name="ownerNumber" placeholder="111-111-1111">
+					</div>
+				</div>
+			
+				<div class="control-group">
+					<label class="control-label" for="companyName">John Deer</label>
+					<div class="controls">
+						<input type="text" name="companyName" placeholder="Company Name...">
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="companyDescription">Company Description</label>
+					<div class="controls">
+						<input type="text" name="companyDescription" placeholder="Company Description...">
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="enterEmail">Enter Email</label>
+					<div class="controls">
+						<input type="text" name="enterEmail" placeholder="john@johndeer.com">
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="createPassword">Enter Password</label>
+					<div class="controls">
+						<input type="password" name="createPassword" placeholder="Password">
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="ReEnterPassword">Re-enter Password</label>
+					<div class="controls">
+						<input type="password" name="reEnterPassword" placeholder="Re-enter Password">
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn">Join</button>
+					</div>
+				</div>
+			
+			</form>
+		</div>
+		
+		<div id="form-wrapper-customer" class="well">
+			<form action="models/custreg.php" method="post">
+				<div class="control-group">
+					<label class="control-label" for="Name">John Doe</label>
+					<div class="controls">
+						<input type="text" name="customerName" placeholder="First Last...">
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="customerDescription">Favorite Keywords...</label>
+					<div class="controls">
+						<input type="text" name="customerDescription" placeholder="Pasta, Spicy, mexican, fishy">
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="enterEmail">Enter Email</label>
+					<div class="controls">
+						<input type="text" name="customerEmail" placeholder="john@johndeer.com">
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="createPassword">Enter Password</label>
+					<div class="controls">
+						<input type="password" name="createPassword" placeholder="Password">
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="ReEnterPassword">Re-enter Password</label>
+					<div class="controls">
+						<input type="password" name="reEnterPassword" placeholder="Re-enter Password">
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn">Join</button>
+					</div>
+				</div>
+			
+			</form>
+		</div>
+	
+	
+	</body>
+	
+	<script type="text/javascript" language="javascript">
+				
+			
+		$('#cust').click(function(event){
+			 //...... logic to hide and show tab content
+			
+			//add 'active' css into clicked navigation
+			$("#btn-wrapper").remove();
+			$('#form-wrapper-customer').addClass("activate");
+		});
+		
+		$('#rest').click(function(event){
+			 //...... logic to hide and show tab content
+			
+			//add 'active' css into clicked navigation
+			$("#btn-wrapper").remove();
+			$('#form-wrapper-restaurant').addClass("activate");
+		});
+	
+		
+			
+			
+		</script>
+	
+	
+</html>

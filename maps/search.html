@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Yelp Search API Example</title>
+    <style type="text/css">
+        html, body {width: 100%; height: 100%; font-family: arial;}  
+        body {margin:0;padding 0;overflow: hidden;}
+        #mapContainer {padding-top: 50px;}
+        #map, #mapContainer {width:100%; height: 100%;}
+        #top {position:absolute; top:0; left:0; width: 100%; height: 50px; line-height: 50px;}
+        #spinner { visibility: hidden; margin-left:3px;}
+        #poweredby, #searchbox {line-height: 50px;}
+        #searchbox {text-align: center;}
+        #poweredby { float: right; margin-right: 3px;}
+        #poweredby img { vertical-align: baseline;}
+        .marker {font-size: 11px;}
+        .marker .businessimage { float: left;}
+        .marker .ratingsimage {vertical-align:middle; margin-top:0px;}
+        .marker .businessinfo { margin-left: 110px;}
+    </style>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDLnEJt-RsUiEejeLJlGyuBAGu5FV6DGOA&sensor=true" type="text/javascript"></script>
+    <script type="text/javascript">
+    var YWSID = "_h3JvqJAKSugPAUx1iR0qg"; // common required parameter (api key)
+
+    var map = null;
+    var icon = null;
+	var markersArray = [];
+
+    /*
+     * Creates the map object and calls setCenterAndBounds
+     * to instantiate it.
+     */
+	 
+	var locator; 
+	
+	function drawCircle(pos){
+		locator = new google.maps.Circle({
+				center: pos,
+				fillColor: "#3333FF",
+				fillOpacity: 1,
+				radius: 300/map.getZoom()
+			});
+		locator.setMap(map);
+	}
+	
+	var pos;
+	
+    function initialize() {
+		var mapOptions = {
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById('map'),
+            mapOptions);
+		
+		if(navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            pos = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+            map.setCenter(pos);
+			drawCircle(pos);
+          });
+		  google.maps.event.addListener(map, 'zoom_changed', function(){
+			  locator.setMap(null);
+			  drawCircle(pos);
+		  });
+		}
+		else {         
+			map.setCenter(new google.maps.LatLng(37.7916,-122.4418),13);
+		}
+                
+
+        // setup our marker icon
+        //var image = new google.maps.MarkerImage("images/marker_star.png",new google.maps.Size(20, 29),new google.maps.Point(15, 29));
+        //var shadow = new google.maps.MarkerImage("images/marker_shadow.png",new google.maps.Size(38, 29),new google.maps.Point(15, 3));
+					
+    }
+
+    /*
+     * Construct the URL to call for the API request
+     */
+    function constructYelpURL() {
+        var mapBounds = map.getBounds();
+        var URL = "http://api.yelp.com/" +
+            "business_review_search?"+
+            "callback=" + "handleResults" +
+            "&term=" + document.getElementById("term").value + 
+            "&num_biz_requested=10" +
+            "&tl_lat=" + mapBounds.getSouthWest().lat() +
+            "&tl_long=" + mapBounds.getSouthWest().lng() + 
+            "&br_lat=" + mapBounds.getNorthEast().lat() + 
+            "&br_long=" + mapBounds.getNorthEast().lng() +
+            "&ywsid=" + YWSID;
+        return encodeURI(URL);
+    }
+
+    /*
+     * Called on the form submission: updates the map by
+     * placing markers on it at the appropriate places
+     */
+	 
+	function deleteOverlays() {
+	  if (markersArray) {
+		for (i in markersArray) {
+		  markersArray[i].setMap(null);
+		}
+		markersArray.length = 0;
+	  }
+	}
+			       
+    function updateMap() {
+        // turn on spinner animation
+        document.getElementById("spinner").style.visibility = 'visible';
+		
+		deleteOverlays();
+		
+		if(document.getElementById('term').value == null || document.getElementById('term').value == ""){
+			document.getElementById("spinner").style.visibility = 'hidden';
+			return false;
+		}
+		
+        var yelpRequestURL = constructYelpURL();
+
+        /* clear existing markers */
+		
+        /* do the api request */
+        var script = document.createElement('script');
+        script.src = yelpRequestURL;
+        script.type = 'text/javascript';
+        var head = document.getElementsByTagName('head').item(0);
+        head.appendChild(script);
+        return false;
+    }
+
+    /*
+     * If a sucessful API response is received, place
+     * markers on the map.  If not, display an error.
+     */
+    function handleResults(data) {
+        // turn off spinner animation
+        document.getElementById("spinner").style.visibility = 'hidden';
+        if(data.message.text == "OK") {
+            if (data.businesses.length == 0) {
+                return;
+            }
+            for(var i=0; i<data.businesses.length; i++) {
+                biz = data.businesses[i];
+                createMarker(biz, new google.maps.LatLng(biz.latitude, biz.longitude), i);
+            }
+        }
+        else {
+        }
+    }
+
+    /*
+     * Formats and returns the Info Window HTML 
+     * (displayed in a balloon when a marker is clicked)
+     */
+    function generateInfoWindowHtml(biz) {
+        var text = '<div class="marker">';
+
+        // image and rating
+        text += '<img class="businessimage" src="'+biz.photo_url+'"/>';
+
+        // div start
+        text += '<div class="businessinfo">';
+        // name/url
+        text += '<a href="'+biz.url+'" target="_blank">'+biz.name+'</a><br/>';
+        // stars
+        text += '<img class="ratingsimage" src="'+biz.rating_img_url_small+'"/>&nbsp;based&nbsp;on&nbsp;';
+        // reviews
+        text += biz.review_count + '&nbsp;reviews<br/><br />';
+        // categories
+        text += formatCategories(biz.categories);
+        // neighborhoods
+        if(biz.neighborhoods.length)
+            text += formatNeighborhoods(biz.neighborhoods);
+        // address
+        text += biz.address1 + '<br/>';
+        // address2
+        if(biz.address2.length) 
+            text += biz.address2+ '<br/>';
+        // city, state and zip
+        text += biz.city + ',&nbsp;' + biz.state + '&nbsp;' + biz.zip + '<br/>';
+        // phone number
+        if(biz.phone.length)
+            text += formatPhoneNumber(biz.phone);
+        // Read the reviews
+        text += '<br/><a href="http://kabra.com/menu/yelp_query.php?name='+biz.name+'&zip='+biz.zip+'&phone='+biz.phone+'" target="_blank">View a Menu »</a><br/>';
+        // div end
+        text += '</div></div>'
+        return text;
+    }
+
+    /*
+     * Formats the categories HTML
+     */
+    function formatCategories(cats) {
+        var s = 'Categories: ';
+        for(var i=0; i<cats.length; i++) {
+            s+= cats[i].name;
+            if(i != cats.length-1) s += ', ';
+        }
+        s += '<br/>';
+        return s;
+    }
+
+    /*
+     * Formats the neighborhoods HTML
+     */
+    function formatNeighborhoods(neighborhoods) {
+        s = 'Neighborhoods: ';
+        for(var i=0; i<neighborhoods.length; i++) {
+            s += '<a href="' + neighborhoods[i].url + '" target="_blank">' + neighborhoods[i].name + '</a>';
+            if (i != neighborhoods.length-1) s += ', ';
+        }
+        s += '<br/>';
+        return s;
+    }
+
+    /*
+     * Formats the phone number HTML
+     */
+    function formatPhoneNumber(num) {
+        if(num.length != 10) return '';
+        return '(' + num.slice(0,3) + ') ' + num.slice(3,6) + '-' + num.slice(6,10) + '<br/>';
+    }
+    
+    /*
+     * Creates a marker for the given business and point
+     */
+    function createMarker(biz, point, i) {
+        var infoWindowHtml = generateInfoWindowHtml(biz);
+		var infoWindow = new google.maps.InfoWindow({
+			content: infoWindowHtml
+		});
+		marker = new google.maps.Marker({
+				position: point
+			});
+		marker.setMap(map);
+		markersArray.push(marker);
+		google.maps.event.addListener(marker, "click", function() {
+            infoWindow.open(map, marker);
+        });
+    }
+
+    //]]>
+    </script>
+  </head>
+  <body onload="initialize();">
+    <div id="top">
+        <div id="poweredby">Powered by <a href="http://www.yelp.com"><img src="http://static.px.yelp.com/i/map/miniMapLogo.png" border="0" /></a></div> 
+        <div id="searchbox">
+            <form>
+                <input type="text" id="term" name="term" /><button type="button" onClick="updateMap();">Search</button>
+                <img id="spinner" src="images/spinner.gif" />
+                <span class="error" id="errorMessage" />
+            </form>
+        </div>
+    </div>
+    <div id="mapContainer"><div id="map"></div></div>
+  </body>
+</html>
